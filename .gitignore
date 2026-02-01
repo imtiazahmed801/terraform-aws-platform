@@ -1,3 +1,25 @@
+# Terraform directories
 .terraform/
-terraform.tfstate
-terraform.tfstate.backup
+**/.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform lock file (optional)
+# Uncomment if you want to ignore it
+# .terraform.lock.hcl
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive files
+*.pem
+*.key
+*.env
+
+# OS / editor noise
+.DS_Store
+.vscode/
+.idea/
