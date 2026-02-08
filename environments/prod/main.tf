@@ -1,8 +1,13 @@
 module "iam_ec2" {
   source = "../../modules/iam-ec2"
 
-  role_name             = "dev-ec2-role"
-  instance_profile_name = "dev-ec2-instance-profile"
+  role_name             = "prod-ec2-role"
+  instance_profile_name = "prod-ec2-instance-profile"
+}
+
+module "vpc" {
+    source = "../../modules/vpc"
+    vpc_cidr = "10.1.0.0/16"
 }
 
 module "security_group" {
@@ -15,16 +20,12 @@ module "security_group" {
 module "launch_template" {
   source = "../../modules/launch-template"
 
-  instance_type             = "t3.micro"
+  instance_type             = var.instance_type
   security_group_ids        = [module.security_group.ec2_security_group_id]
   iam_instance_profile_name = module.iam_ec2.instance_profile_name
   user_data_file            = "user_data.sh"
 
-  tags = {
-    Environment = "dev"
-    Project     = "flagship-aws-platform"
-    Owner       = "imtiaz"
-  }
+  tags = var.tags
 }
 
 module "asg" {
@@ -34,13 +35,9 @@ module "asg" {
   private_subnet_ids      = module.vpc.private_subnet_ids
   target_group_arns       = [module.vpc.app_tg_arn]
 
-  min_size         = 0
-  max_size         = 3
-  desired_capacity = 0
+  min_size         = var.min_size
+  max_size         = var.max_size
+  desired_capacity = var.desired_capacity
 
-  tags = {
-    Environment = "dev"
-    Project     = "flagship-aws-platform"
-    Owner       = "imtiaz"
-  }
+  tags = var.tags
 }
