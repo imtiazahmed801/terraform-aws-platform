@@ -32,17 +32,17 @@ jobs:
             role-to-assume: arn:aws:iam::724134393251:role/github-actions-terraform-dev
             aws-region: us-east-1
 
+      - name: Terraform init (dev)
+        working-directory: environments/dev
+        run: terraform init -input=false
+
       - name: Terraform fmt (dev)
         working-directory: environments/dev
         run: terraform fmt -check -recursive
 
-      - name: Terraform init (dev)
-        working-directory: environments/dev
-        run: terraform init -backend=false
-
       - name: Terraform validate (dev)
         working-directory: environments/dev
-        run: terraform validate
+        run: terraform validate 
 
       - name: Terraform plan (dev)
         working-directory: environments/dev
