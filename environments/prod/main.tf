@@ -6,8 +6,8 @@ module "iam_ec2" {
 }
 
 module "vpc" {
-    source = "../../modules/vpc"
-    vpc_cidr = "10.1.0.0/16"
+  source   = "../../modules/vpc"
+  vpc_cidr = "10.1.0.0/16"
 }
 
 module "security_group" {
