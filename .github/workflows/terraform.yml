@@ -70,13 +70,13 @@ jobs:
             role-to-assume: arn:aws:iam::724134393251:role/github-actions-terraform-prod
             aws-region: us-east-1
             
+      - name: Terraform init (prod)
+        working-directory: environments/prod
+        run: terraform init -input=false
+
       - name: Terraform fmt (prod)
         working-directory: environments/prod
         run: terraform fmt -check -recursive
-
-      - name: Terraform init (prod)
-        working-directory: environments/prod
-        run: terraform init -backend=false
 
       - name: Terraform validate (prod)
         working-directory: environments/prod
