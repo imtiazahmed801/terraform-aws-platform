@@ -92,3 +92,7 @@ jobs:
       - name: Terraform plan (prod)
         working-directory: environments/prod
         run: terraform plan -input=false
+
+      - name: Terraform apply (prod)
+        working-directory: environments/prod
+        run: terraform apply -auto-approve -input=false
