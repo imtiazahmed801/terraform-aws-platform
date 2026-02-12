@@ -27,3 +27,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "vpc_cidr" {
+  description = "The CIDR block for the VPC"
+  type        = string 
+}
