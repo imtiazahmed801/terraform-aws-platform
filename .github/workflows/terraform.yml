@@ -49,6 +49,11 @@ jobs:
         working-directory: environments/dev
         run: terraform plan -input=false
 
+      - name: Terraform apply (dev)
+        if: github.ref == 'refs/heads/main'
+        working-directory: environments/dev
+        run: terraform apply -auto-approve -input=false
+
       # ---------- PROD ----------
   terraform-prod:
     name: Terraform checks (prod)
