@@ -16,6 +16,7 @@ jobs:
   terraform-dev:
     name: Terraform checks (dev & prod)
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
       - name: Checkout repo
@@ -54,6 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: terraform-dev
     if: github.ref == 'refs/heads/main'
+    environment: prod
 
     steps:
       - name: Checkout repo
